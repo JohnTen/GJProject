@@ -1,129 +1,84 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Collections.Generic;
+using UnityEngine;
 
-/// <summary>
-/// 定时事件，在经过指定的时间后激发事件
-/// </summary>
-public class Timer
+namespace UnityUtility
 {
-	protected bool once;
-	protected bool active;
-	protected Action action;
-	protected float riseTime;
-	protected float passedTime;
-
-	/// <summary>
-	/// 定时事件构造函数
-	/// </summary>
-	/// <param name="riseTime">隔多长时间激发事件</param>
-	/// <param name="action">所激发的事件</param>
-	public Timer(float riseTime, Action action)
+	public class Timer : IDisposable
 	{
-		this.riseTime = riseTime;
-		this.action = action;
-		once = false;
-	}
+		class InnerTImer : MonoBehaviour
+		{
+			public List<int> keys = new List<int>();
+			public Dictionary<int, float> times = new Dictionary<int, float>();
+			public Dictionary<int, Action> timeouts = new Dictionary<int, Action>();
 
-	/// <summary>
-	/// 定时事件构造函数
-	/// </summary>
-	/// <param name="riseTime">隔多长时间激发事件</param>
-	/// <param name="action">所激发的事件</param>
-	/// <param name="once">是否只激发一次事件</param>
-	public Timer(float riseTime, Action action, bool once) : this(riseTime, action)
-	{
-		this.once = once;
-	}
+			private void Update()
+			{
+				foreach (var k in keys)
+				{
+					if (times[k] <= 0) continue;
 
-	/// <summary>
-	/// 启动定时
-	/// </summary>
-	public void Start()
-	{
-		// 如果已经启动了，则直接退出
-		if (active) return;
-		active = true;
+					times[k] -= Time.deltaTime;
+					if (times[k] > 0) continue;
 
-		// 开始接收时间更新
-		GameTime.UpdateCall += ReceiveTimeUpdate;
-	}
+					timeouts[k]?.Invoke();
+				}
+			}
+		}
 
-	/// <summary>
-	/// 暂停定时
-	/// </summary>
-	public void Pause()
-	{
-		// 如果已经停止了，则直接退出
-		if (!active) return;
-		active = false;
+		static InnerTImer innerTimer;
+		static InnerTImer InnerTimer
+		{
+			get
+			{
+				if (innerTimer != null)
+					return innerTimer;
 
-		// 停止接收时间更新
-		GameTime.UpdateCall -= ReceiveTimeUpdate;
-	}
+				innerTimer = GlobalObject.GetOrAddComponent<InnerTImer>();
+				return innerTimer;
+			}
+		}
 
-	/// <summary>
-	/// 停止定时
-	/// </summary>
-	public void Stop()
-	{
-		// 如果已经停止了，则直接退出
-		if (!active) return;
-		active = false;
-		
-		// 清除之前的计时
-		passedTime = 0;
+		private int timerID;
 
-		// 停止接收时间更新
-		GameTime.UpdateCall -= ReceiveTimeUpdate;
-	}
+		private float startTime;
 
-	/// <summary>
-	/// 激发时间
-	/// </summary>
-	public float RiseTime
-	{
-		get { return riseTime; }
-		set { riseTime = value; }
-	}
+		public event Action OnTimeOut;
 
-	/// <summary>
-	/// 激发事件
-	/// </summary>
-	public event Action TimerEvent
-	{
-		add { action += value; }
-		remove { action -= value; }
-	}
+		public Timer()
+		{
+			timerID = GetHashCode();
+			InnerTimer.keys.Add(timerID);
+			InnerTimer.times.Add(timerID, 0);
+			InnerTimer.timeouts.Add(timerID, OnTimeOut);
+		}
 
-	/// <summary>
-	/// 检查时间，看是否到达定时时间
-	/// </summary>
-	/// <returns></returns>
-	protected virtual bool CheckTime()
-	{
-		// 如果尚未到达定时时间，返回false
-		if (passedTime < riseTime) return false;
+		public bool IsReachedTime()
+		{
+			return InnerTimer.times[timerID] <= 0;
+		}
 
-		// 从累计时间中减去定时的时间
-		passedTime -= riseTime;
+		public float PassedPercentage
+		{
+			get
+			{
+				return InnerTimer.times[timerID] / startTime;
+			}
+		}
 
-		// 如果这个定时器只执行一次，停止定时器
-		if (once) Stop();
-		return true;
-	}
+		public void Start(float time)
+		{
+			startTime = time;
+			InnerTimer.times[timerID] = time;
+		}
 
-	/// <summary>
-	/// 时间更新函数
-	/// </summary>
-	/// <param name="deltaTime"></param>
-	protected virtual void ReceiveTimeUpdate(float deltaTime)
-	{
-		// 累计时间
-		passedTime += deltaTime;
-		// 检查是否到达定时，且如果有可执行事件的话，执行它们
-		if (CheckTime() && action != null)
-			action.Invoke();
+		public void Dispose()
+		{
+			InnerTimer.keys.Remove(timerID);
+			InnerTimer.times.Remove(timerID);
+			InnerTimer.timeouts.Remove(timerID);
+		}
 	}
 }
+
