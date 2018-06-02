@@ -95,6 +95,19 @@ namespace UnityUtility
 				angle.y.Clamp180());
 		}
 
+		public static Vector3Int ToVector3Int(this Vector3 vec)
+		{
+			vec.x += vec.x < 0 ? -1 : 0;
+			vec.y += vec.y < 0 ? -1 : 0;
+			vec.z += vec.z < 0 ? -1 : 0;
+			return new Vector3Int((int)vec.x, (int)vec.y, (int)vec.z);
+		}
+
+		public static bool IsWithInBound(this Bounds self, Bounds other)
+		{
+			return other.Contains(self.max) && other.Contains(self.min);
+		}
+
 		// From TOMS...
 		// TODO: Figure out those 'reflection' stuffs.
 		/*
