@@ -23,14 +23,16 @@ public class Caterpillar : AutoRelease
 		if (transform.up.y > 0)
 		{
 			dir = true;
-			Debug.DrawRay(transform.position, -transform.up * 0.12f, Color.red);
-			return Physics2D.Raycast(transform.position, -transform.up, 0.12f).transform != null;
+			transform.localScale = Vector3.one;
+			Debug.DrawRay(transform.position, -transform.up * 0.25f, Color.red);
+			return Physics2D.Raycast(transform.position, -transform.up, 0.25f).transform != null;
 		}
 		else
 		{
 			dir = false;
-			Debug.DrawRay(transform.position, transform.up * 0.12f, Color.red);
-			return Physics2D.Raycast(transform.position, transform.up, 0.12f).transform != null;
+			transform.localScale = new Vector3(1, -1, 1);
+			Debug.DrawRay(transform.position, transform.up * 0.25f, Color.red);
+			return Physics2D.Raycast(transform.position, transform.up, 0.25f).transform != null;
 		}
 	}
 
@@ -52,5 +54,22 @@ public class Caterpillar : AutoRelease
 		if (!IsOnGround()) return;
 
 		MoveForward();
+	}
+
+	private void Update()
+	{
+		var hits = Physics2D.RaycastAll(transform.position, Vector2.down, 2f);
+		GroundBlock block = null;
+		foreach (var h in hits)
+		{
+			block = h.transform.GetComponent<GroundBlock>();
+			if (block != null) break;
+		}
+
+		if (block == null || block.Faction.ID == Faction.Default.ID)
+			return;
+
+		block.Faction = Faction.Default;
+		ReleaseSelf();
 	}
 }

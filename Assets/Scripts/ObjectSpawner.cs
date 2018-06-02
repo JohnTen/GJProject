@@ -37,7 +37,7 @@ public class ObjectSpawner : MonoBehaviour
 		var obj = spawnObjects[index];
 		var freq = obj.spawnFreq.Evaluate(PassedTime);
 
-		if (Random.value > freq) return;
+		if (Random.value > freq * Time.deltaTime) return;
 
 		var scenebound = SceneValues.GetSceneBound();
 		var randomX = Random.Range(scenebound.min.x, scenebound.max.x);

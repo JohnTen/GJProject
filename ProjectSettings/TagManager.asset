@@ -8,6 +8,7 @@ TagManager:
   - Sunshine
   - Caterpillar
   - Friend
+  - GroundBlock
   layers:
   - Default
   - TransparentFX
@@ -20,8 +21,8 @@ TagManager:
   - Leaf
   - Sunshine
   - Ground
-  - 
-  - 
+  - AntiCaterpillar
+  - Caterpillar
   - 
   - 
   - 

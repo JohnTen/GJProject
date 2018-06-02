@@ -8,7 +8,7 @@ public class Leaf : MonoBehaviour
 	{
 		var rigid = collision.transform.GetComponent<Rigidbody2D>();
 		rigid.drag = 1;
-		rigid.velocity *= 0.3f;
+		rigid.velocity *= 1f;
 	}
 
 	private void OnCollisionExit2D(Collision2D collision)

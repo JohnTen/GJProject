@@ -10,9 +10,12 @@ public class PauseMenu : MonoBehaviour
     private GameObject pauseMenu;
     public bool gameOver = false;
     public bool pauseActive = false;
-	
 
-	// Update is called once per frame
+	private void Awake()
+	{
+		Time.timeScale = 1f;
+	}
+
 	void Update ()
 	{
         if (Input.GetButtonDown("Cancel") && gameOver == false)

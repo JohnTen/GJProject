@@ -7,6 +7,11 @@ public class AutoRelease : SpawnableObject
 {
 	[SerializeField]
 	protected float releaseTime;
+	public float ReleaseTime
+	{
+		get { return releaseTime; }
+		set { releaseTime = value; }
+	}
 
 	Timer releaseTim;
 
