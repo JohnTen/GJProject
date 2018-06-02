@@ -43,7 +43,8 @@ public class ObjectSpawner : MonoBehaviour
 		var randomX = Random.Range(scenebound.min.x, scenebound.max.x);
 		var point = new Vector2(randomX, scenebound.max.y + spawnHeight);
 
-		Instantiate(obj.obj, point, Quaternion.identity);
+		var spawn = ObjectPool.Acquire(obj.obj);
+		spawn.transform.position = point;
 	}
 	private void Update()
 	{

@@ -38,7 +38,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4790699494696036}
   - component: {fileID: 50968099328002958}
-  - component: {fileID: 114161403002061394}
   m_Layer: 0
   m_Name: Caterpillar_Left
   m_TagString: Caterpillar
@@ -55,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4092314675984006}
   - component: {fileID: 212831568877474572}
-  - component: {fileID: 61074989476680866}
+  - component: {fileID: 70782902562903074}
   m_Layer: 0
   m_Name: Sprite_Right
   m_TagString: Untagged
@@ -72,7 +71,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4798232433445886}
   - component: {fileID: 212000429237656840}
-  - component: {fileID: 61158398318465680}
+  - component: {fileID: 70335415941815344}
   m_Layer: 0
   m_Name: Sprite_Left
   m_TagString: Untagged
@@ -127,7 +126,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1247963668543818}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.87, y: 5.82, z: -0.36523438}
+  m_LocalPosition: {x: -1.956785, y: 0.47062123, z: -0.36523438}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4092314675984006}
@@ -175,33 +174,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &61074989476680866
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1518350269933964}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!61 &61158398318465680
-BoxCollider2D:
+--- !u!70 &70335415941815344
+CapsuleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -213,30 +187,23 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
   m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &114161403002061394
-MonoBehaviour:
+  m_Direction: 1
+--- !u!70 &70782902562903074
+CapsuleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1470002523497892}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf19c8e8b7bf7a5479bb65312a9be942, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.5
+  m_GameObject: {fileID: 1518350269933964}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 1}
+  m_Direction: 1
 --- !u!114 &114683931777487398
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -248,6 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf19c8e8b7bf7a5479bb65312a9be942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  releaseTime: 10
   speed: 0.5
 --- !u!212 &212000429237656840
 SpriteRenderer:
@@ -283,9 +251,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 78ead1f347a504648ab30f024d22962a, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9921569, g: 0.6862745, b: 0.9568628, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -328,9 +296,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 78ead1f347a504648ab30f024d22962a, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.990566, g: 0.60275006, b: 0.95675063, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -360,5 +328,5 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -50
-    m_UpperAngle: 50
+    m_LowerAngle: -40
+    m_UpperAngle: 40

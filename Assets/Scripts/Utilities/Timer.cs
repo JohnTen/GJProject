@@ -10,19 +10,39 @@ namespace UnityUtility
 		class InnerTImer : MonoBehaviour
 		{
 			public List<int> keys = new List<int>();
-			public Dictionary<int, float> times = new Dictionary<int, float>();
-			public Dictionary<int, Action> timeouts = new Dictionary<int, Action>();
+			public Dictionary<int, Timer> timers = new Dictionary<int, Timer>();
 
 			private void Update()
 			{
+				for (int i = 0; i < keys.Count; i ++)
+				{
+					var k = keys[i];
+					Timer timer;
+					if (!timers.TryGetValue(k, out timer))
+					{
+						keys.Remove(k);
+						i--;
+					}
+					else if (timer.disposing)
+					{
+						keys.Remove(k);
+						timers.Remove(k);
+						i--;
+					}
+				}
+
 				foreach (var k in keys)
 				{
-					if (times[k] <= 0) continue;
+					if (timers[k].timeLeft <= 0) continue;
 
-					times[k] -= Time.deltaTime;
-					if (times[k] > 0) continue;
-
-					timeouts[k]?.Invoke();
+					timers[k].timeLeft -= Time.deltaTime;
+					if (timers[k].timeLeft > 0) continue;
+					
+					if (timers[k].Repeat)
+					{
+						timers[k].timeLeft += timers[k].startTime;
+					}
+					timers[k].OnTimeOut?.Invoke();
 				}
 			}
 		}
@@ -41,8 +61,10 @@ namespace UnityUtility
 		}
 
 		private int timerID;
+		private bool disposing = false;
 
 		private float startTime;
+		private float timeLeft;
 
 		public event Action OnTimeOut;
 
@@ -50,34 +72,30 @@ namespace UnityUtility
 		{
 			timerID = GetHashCode();
 			InnerTimer.keys.Add(timerID);
-			InnerTimer.times.Add(timerID, 0);
-			InnerTimer.timeouts.Add(timerID, OnTimeOut);
+			InnerTimer.timers.Add(timerID, this);
 		}
+
+		public bool Repeat { get; set; } = false;
 
 		public bool IsReachedTime()
 		{
-			return InnerTimer.times[timerID] <= 0;
+			return timeLeft <= 0;
 		}
 
 		public float PassedPercentage
 		{
-			get
-			{
-				return InnerTimer.times[timerID] / startTime;
-			}
+			get { return timeLeft / startTime; }
 		}
 
 		public void Start(float time)
 		{
 			startTime = time;
-			InnerTimer.times[timerID] = time;
+			timeLeft = time;
 		}
 
 		public void Dispose()
 		{
-			InnerTimer.keys.Remove(timerID);
-			InnerTimer.times.Remove(timerID);
-			InnerTimer.timeouts.Remove(timerID);
+			disposing = true;
 		}
 	}
 }
