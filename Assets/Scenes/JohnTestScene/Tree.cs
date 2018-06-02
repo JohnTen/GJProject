@@ -27,8 +27,8 @@ public class Tree : MonoBehaviour
 	{
 		switch (collision.transform.tag)
 		{
-			case "Bug":
-				print("You are ate by bugs");
+			case "Caterpillar":
+				print("You are ate by Caterpillars");
 				break;
 			case "WaterDrop":
 				print("You caught a drop of water");
