@@ -88,19 +88,20 @@ public class PCTree : MonoBehaviour
 		if (ate || !canMove)
 			return;
 
+		if (rooted)
+		{
+			if (standingBlock.Faction.ID != this.faction.ID)
+				return;
+
+			canMove = false;
+			standingBlock.Rooted = false;
+			animator.SetBool("Root", false);
+			Invoke("Wait_pull", pullDelay);
+		}
+
 		if (Input.GetButtonDown(faction.rootButton) && canMove)
 		{
-			if (rooted)
-			{
-				if (standingBlock.Faction.ID != this.faction.ID)
-					return;
-
-				canMove = false;
-				standingBlock.Rooted = false;
-				animator.SetBool("Root", false);
-				Invoke("Wait_pull", pullDelay);
-			}
-			else
+			if (!rooted)
 			{
 				if (standingBlock.Transfering ||
 					standingBlock.Rooted)
