@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityUtility;
@@ -298,6 +299,32 @@ public class PCTree : MonoBehaviour
 				Invoke("Wait_friend", transferDewDelay);
 				print("Give dew to friend");
 				break;
+
+			case "Player":
+				var other = collision.transform.GetComponent<PCTree>();
+				if (rooted || other.rooted)
+					break;
+
+				StartCoroutine(FlashPass(other.transform.position - transform.position));
+
+				break;
 		}
+	}
+
+	private IEnumerator FlashPass(Vector3 vector3)
+	{
+		vector3.y = 0;
+		vector3.Normalize();
+		canMove = false;
+
+		float time = 0.06f;
+		while (time > 0)
+		{
+			transform.Translate(vector3 * speed * 3 * Time.deltaTime);
+			time -= Time.deltaTime;
+			ClampToScene();
+			yield return null;
+		}
+		canMove = true;
 	}
 }

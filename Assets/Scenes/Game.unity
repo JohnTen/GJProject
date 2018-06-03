@@ -156,7 +156,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.060483575, y: -0.4598949}
+  m_Offset: {x: 0.060483575, y: -0.16576087}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -167,7 +167,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4154952, y: 1.1413932}
+  m_Size: {x: 1.4154952, y: 0.55312514}
   m_EdgeRadius: 0
 --- !u!50 &52216221
 Rigidbody2D:
@@ -871,7 +871,7 @@ GameObject:
   - component: {fileID: 618717800}
   - component: {fileID: 618717802}
   - component: {fileID: 618717801}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -975,7 +975,7 @@ GameObject:
   - component: {fileID: 677656366}
   - component: {fileID: 677656367}
   - component: {fileID: 677656368}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1477,6 +1477,7 @@ GameObject:
   m_Component:
   - component: {fileID: 811182737}
   - component: {fileID: 811182736}
+  - component: {fileID: 811182738}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -1501,23 +1502,14 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0
+        time: 1
+        value: 0.4
         inSlope: 0.100418404
         outSlope: 0.100418404
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0.99583334
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0.09297521
-        outSlope: 0.09297521
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 1
-        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
@@ -1526,23 +1518,14 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0
+        time: 1
+        value: 0.1
         inSlope: 0.099999994
         outSlope: 0.099999994
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 1
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0.09375
-        outSlope: 0.09375
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 1
-        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
@@ -1551,29 +1534,21 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0
+        time: 1
+        value: 0.3
         inSlope: 0.05146443
         outSlope: 0.05146443
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0.99583334
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0.05103734
-        outSlope: 0.05103734
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 1
-        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
   spawnHeight: 1
   spawning: 1
-  PassedTime: 1
+  passedTime: 0
+  spawnArea: {fileID: 811182738}
 --- !u!4 &811182737
 Transform:
   m_ObjectHideFlags: 0
@@ -1587,6 +1562,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &811182738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 811182735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95c973f03d868be419b1e5762e8fae09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bound:
+    m_Center: {x: -0.016324043, y: 1.7252941, z: 0}
+    m_Extent: {x: 5.6250334, y: 5.334923, z: 0}
 --- !u!1001 &825322223
 Prefab:
   m_ObjectHideFlags: 0
@@ -1643,7 +1632,7 @@ GameObject:
   - component: {fileID: 831521971}
   - component: {fileID: 831521973}
   - component: {fileID: 831521972}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: SunSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1790,7 +1779,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 896966654}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.7, y: -3.14, z: 0}
+  m_LocalPosition: {x: 6.89, y: -3.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1585030195}
@@ -1986,7 +1975,7 @@ GameObject:
   - component: {fileID: 1010758605}
   - component: {fileID: 1010758607}
   - component: {fileID: 1010758606}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2173,7 +2162,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1090150721}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.23, y: -3.14, z: 0}
+  m_LocalPosition: {x: -6.94, y: -3.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 618717800}
@@ -2985,7 +2974,7 @@ GameObject:
   - component: {fileID: 1343895954}
   - component: {fileID: 1343895953}
   - component: {fileID: 1343895956}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3428,7 +3417,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.060483575, y: -0.4598949}
+  m_Offset: {x: 0.060483575, y: -0.16576087}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -3439,7 +3428,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4154952, y: 1.1413932}
+  m_Size: {x: 1.4154952, y: 0.55312514}
   m_EdgeRadius: 0
 --- !u!50 &1632347330
 Rigidbody2D:
@@ -3590,7 +3579,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1683631983}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.16, y: -4.07, z: -0.4730597}
+  m_LocalPosition: {x: -1.16, y: -4.28, z: -0.4730597}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3795,7 +3784,7 @@ GameObject:
   - component: {fileID: 1926631374}
   - component: {fileID: 1926631373}
   - component: {fileID: 1926631372}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: SunSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3995,9 +3984,9 @@ GameObject:
   - component: {fileID: 1970974805}
   - component: {fileID: 1970974803}
   - component: {fileID: 1970974802}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Tree2
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4074,9 +4063,9 @@ GameObject:
   - component: {fileID: 2040057527}
   - component: {fileID: 2040057529}
   - component: {fileID: 2040057530}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Tree1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

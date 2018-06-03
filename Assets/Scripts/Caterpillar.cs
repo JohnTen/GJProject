@@ -38,10 +38,12 @@ public class Caterpillar : AutoRelease
 
 	void MoveForward()
 	{
-		if (dir)
-			body.velocity = transform.right * speed;
-		else
-			body.velocity = -transform.right * speed;
+		body.velocity = transform.right * speed;
+	}
+
+	public void ResetReleaseTime(float time)
+	{
+		releaseTim.Start(time);
 	}
 
 	private void Awake()

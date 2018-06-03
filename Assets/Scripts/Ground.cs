@@ -9,13 +9,13 @@ public class Ground : MonoBehaviour
 		switch(collision.transform.tag)
 		{
 			case "Caterpillar":
-			var obj = collision.transform.GetComponent<AutoRelease>();
+			var obj = collision.transform.GetComponent<Caterpillar>();
 			if (obj == null)
 			{
-				obj = collision.transform.parent.GetComponent<AutoRelease>();
+				obj = collision.transform.parent.GetComponent<Caterpillar>();
 			}
 
-				obj.ReleaseTime = 3;
+				obj.ResetReleaseTime(3);
 			break;
 
 			case "WaterDrop":

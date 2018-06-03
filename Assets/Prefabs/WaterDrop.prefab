@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4044085884881604}
   - component: {fileID: 50635888166731442}
   - component: {fileID: 114140783943710644}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: WaterDrop
   m_TagString: WaterDrop
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4231830652554618}
   - component: {fileID: 212702522838869390}
   - component: {fileID: 58184950884362292}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

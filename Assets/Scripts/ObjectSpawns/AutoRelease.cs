@@ -13,7 +13,7 @@ public class AutoRelease : SpawnableObject
 		set { releaseTime = value; }
 	}
 
-	Timer releaseTim;
+	protected Timer releaseTim;
 
 	private void OnEnable()
 	{

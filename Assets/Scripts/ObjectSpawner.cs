@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityUtility;
 
 public class ObjectSpawner : MonoBehaviour
 {
@@ -21,7 +22,10 @@ public class ObjectSpawner : MonoBehaviour
 	bool spawning;
 
 	[SerializeField]
-	float PassedTime;
+	float passedTime;
+
+	[SerializeField]
+	BoxArea spawnArea;
 
 	public bool Spawning
 	{
@@ -35,7 +39,7 @@ public class ObjectSpawner : MonoBehaviour
 			return;
 
 		var obj = spawnObjects[index];
-		var freq = obj.spawnFreq.Evaluate(PassedTime);
+		var freq = obj.spawnFreq.Evaluate(passedTime);
 
 		if (Random.value > freq * Time.deltaTime) return;
 
@@ -43,9 +47,21 @@ public class ObjectSpawner : MonoBehaviour
 		var randomX = Random.Range(scenebound.min.x, scenebound.max.x);
 		var point = new Vector2(randomX, scenebound.max.y + spawnHeight);
 
+		if (spawnArea != null)
+		{
+			point = spawnArea.GetRandomPoint();
+			point.y = scenebound.max.y + spawnHeight;
+		}
+
 		var spawn = ObjectPool.Acquire(obj.obj);
 		spawn.transform.position = point;
 	}
+
+	private void Awake()
+	{
+		spawnArea = GetComponent<BoxArea>();
+	}
+
 	private void Update()
 	{
 		if (!spawning) return;
@@ -54,5 +70,4 @@ public class ObjectSpawner : MonoBehaviour
 			Spawn(i);
 		}
 	}
-
 }

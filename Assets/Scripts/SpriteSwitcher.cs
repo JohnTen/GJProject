@@ -42,7 +42,7 @@ public class SpriteSwitcher : MonoBehaviour
 			color.a = Mathf.Lerp(start, target, time / fadeDuraition);
 			renderer.color = color;
 			time += Time.deltaTime;
-			print(time);
+
 			yield return null;
 		}
 		color.a = target;
